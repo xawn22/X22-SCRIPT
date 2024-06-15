@@ -968,7 +968,7 @@ resbysftp
 setdb
 ;;
 *)
-funbackup
+menu
 ;;
 esac
 }
