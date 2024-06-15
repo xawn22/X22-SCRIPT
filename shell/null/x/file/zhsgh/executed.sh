@@ -127,7 +127,7 @@ exit 0
 fi
 
 export NC='\033[0m'
-export S='\E[41;1;39m'
+export S='\E[44;1;39m'
 export multi='\E[41;1;39m'
 export cyan='\033[0;36m'
 export or='\033[1;33m'
@@ -306,7 +306,7 @@ log="
 <code>Domain :</code> ${mydomain}
 <code>Exp    :</code> ${lended}
 ────────────────────
-<i>Notif From Github Bochil132</i>
+<i>Notif From Github Awn22</i>
 "
 curl -s --max-time 10 -d "chat_id=1668998643r&disable_web_page_preview=1&text=${log}&parse_mode=html" https://api.telegram.org/bot6296920647:AAH1ZmEzgCZnlL6QpeIXhOUz7l3mVUaxw4c/sendMessage >/dev/null
 

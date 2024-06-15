@@ -395,8 +395,7 @@ wget -O cf-pointing "https://${url3}/cloudflare-pointing.sh"
 wget -O cf-setting "https://${url3}/cloudflare-setting.sh"
 wget -O package-xray "https://${url4}/package-xray.sh"
 wget -O menu "https://${url3}/menu.sh"
-wget -O backup "https://${url5}/gdrive.sh"
-wget -O bkp "https://${url5}/autobackup.sh"
+wget -O autobckp "https://${url5}/backup2024.sh"
 wget -O menu-ssh "https://${url3}/function-ssh.sh"
 wget -O menu-trgo "https://${url3}/function-trgo.sh"
 wget -O menu-vmess "https://${url3}/function-vmess.sh"
@@ -415,12 +414,11 @@ chmod +x menu
 chmod +x exp
 chmod +x swapkvm
 chmod +x ins-xray
-chmod +x backup
+chmod +x autobckp
 chmod +x license
 chmod +x menu-ssh
 chmod +x menu-vmess
 chmod +x menu-trgo
-chmod +x bkp
 
 echo "0 9 * * * root clearlog && reboot" >> /etc/crontab
 echo "0 7 * * * root exp" >> /etc/crontab
@@ -462,13 +460,7 @@ echo "unset HISTFILE" >> /etc/profile
 cd
 rm -f /root/key.pem
 rm -f /root/cert.pem
-rm -f /root/ssh-vpn.ah
-
-sed -i "s/8442/2087/g" /etc/xray/config.json
-sed -i "s/85/2082/g" /etc/xray/config.json
-sed -i "s/off/vless-tls/g" /etc/xray/config.json
-sed -i "s/vless-tlsf/vless-ntls/g" /etc/xray/config.json
-sed -i "s/2087/2097/g" /etc/trojan-go/config.json
+rm -f /root/package-ssh.sh
 
 # finihsing
 clear

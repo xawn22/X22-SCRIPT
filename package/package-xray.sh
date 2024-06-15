@@ -161,7 +161,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 8442,
+      "port": 2087,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -187,7 +187,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/off",
+          "path": "/vless-tls",
           "headers": {
             "Host": ""
           }
@@ -204,7 +204,7 @@ cat > /etc/xray/config.json << END
       }
     },
     {
-      "port": 85,
+      "port": 2082,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -223,7 +223,7 @@ cat > /etc/xray/config.json << END
         "kcpSettings": {},
         "httpSettings": {},
         "wsSettings": {
-          "path": "/offf",
+          "path": "/vless-ntls",
           "headers": {
             "Host": ""
           }
@@ -407,7 +407,7 @@ cat > /etc/trojan-go/config.json << END
 {
   "run_type": "server",
   "local_addr": "0.0.0.0",
-  "local_port": 2087,
+  "local_port": 2097,
   "remote_addr": "127.0.0.1",
   "remote_port": 89,
   "log_level": 1,

@@ -6,7 +6,7 @@ url2="scstn22.stn-cloud.my.id/dll"
 url3="scstn22.stn-cloud.my.id/ssh"
 #color code
 export NC='\033[0m'
-export multi='\E[43;1;39m'
+export multi='\E[44;1;39m'
 export semua='\E[45;1;39m'
 export new='\E[45;1;39m'
 export cyan='\033[0;36m'
@@ -261,24 +261,23 @@ echo -e " STORAGE     = $(df -h / | awk '{print $2}' | tail -n1 | sed 's/G//g' |
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${multi}                ${rd}Status All Service                  ${NC}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e " ${green}•${NC} NGINX                        = $nx"
-echo -e " ${green}•${NC} SSH / TUN                    = $status_ssh"
-echo -e " ${green}•${NC} OVPN WS                      = $swsovpn"
-echo -e " ${green}•${NC} DROPBEAR                     = $status_beruangjatuh"
-echo -e " ${green}•${NC} VNSTAT                       = $status_vnstat"
-echo -e " ${green}•${NC} SSH WS TLS                   = $swstls"
-echo -e " ${green}•${NC} SSH WS NONE TLS              = $swsdrop"
-echo -e " ${green}•${NC} VMESS TLS                    = $v2ray_tls"
-echo -e " ${green}•${NC} VMESS NONE TLS               = $v2ray_ntls"
-echo -e " ${green}•${NC} TROJAN GO TLS                = $status_trgo"
-echo -e " ${green}•${NC} STUNNEL                      = $status_stunnel"
-echo -e " ${green}•${NC} SSLH                         = $sosslh"
-echo -e " ${green}•${NC} FAIL2BAN                     = $status_fail2ban"
-echo -e " ${green}•${NC} SSHD                         = $shdd"
-echo -e " ${green}•${NC} BADVPN UDPGW                 = $udpw"
-echo -e " ${green}•${NC} CRONTAB                      = $cr"
-echo -e " ${green}•${NC} SQUID PROXY                  = $sq"
-echo -e " ${green}•${NC} SSH UDP                      = ${udp}"
+echo -e " ${green}•${NC} NGINX                        = $nx !"
+echo -e " ${green}•${NC} SSH / TUN                    = $status_ssh !"
+echo -e " ${green}•${NC} OVPN WS                      = $swsovpn !"
+echo -e " ${green}•${NC} DROPBEAR                     = $status_beruangjatuh !"
+echo -e " ${green}•${NC} VNSTAT                       = $status_vnstat !"
+echo -e " ${green}•${NC} SSH WS TLS                   = $swstls !"
+echo -e " ${green}•${NC} SSH WS NONE TLS              = $swsdrop !"
+echo -e " ${green}•${NC} VMESS TLS                    = $v2ray_tls !"
+echo -e " ${green}•${NC} TROJAN GO TLS                = $status_trgo !"
+echo -e " ${green}•${NC} STUNNEL                      = $status_stunnel !"
+echo -e " ${green}•${NC} SSLH                         = $sosslh !"
+echo -e " ${green}•${NC} FAIL2BAN                     = $status_fail2ban !"
+echo -e " ${green}•${NC} SSHD                         = $shdd !"
+echo -e " ${green}•${NC} BADVPN UDPGW                 = $udpw !"
+echo -e " ${green}•${NC} CRONTAB                      = $cr !"
+echo -e " ${green}•${NC} SQUID PROXY                  = $sq !"
+echo -e " ${green}•${NC} SSH UDP                      = ${udp} !"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e ""
 read -n 1 -s -r -p "Tap Enter To Back Home-Menu"
@@ -572,38 +571,36 @@ menu
 
 function xol(){
 clear
+echo -e "
+Install bot panel based by @XolPanel
+Moodedd and update by @WaanSuka_Turu
+Thanks All
+" | lolcat
+echo ""
+read -rp "Tap enter to run install bot panel"
+clear
 apt update && apt upgrade
 apt install python3 python3-pip git
-git clone https://github.com/bochil132/XRAY-SSH.git
-unzip XRAY-SSH/xolpanel.zip
-pip3 install -r xolpanel/requirements.txt
+git clone https://github.com/xawn22/X22-SCRIPT.git
+unzip X22-SCRIPT/dll/x.zip
+pip3 install -r awpanel/requirements.txt
 
 #isi data
 echo ""
 read -e -p "[*] Input your Bot Token : " bottoken
 read -e -p "[*] Input Your Id Telegram : " admin
 domain=$(cat /etc/xray/domain)
-echo -e BOT_TOKEN='"'$bottoken'"' > /root/xolpanel/var.txt
-echo -e ADMIN='"'$admin'"' >> /root/xolpanel/var.txt
-echo -e DOMAIN='"'$domain'"' >> /root/xolpanel/var.txt
-clear
-echo "Done"
-echo "Your Data Bot"
-echo -e "==============================="
-echo "DOMAIN         : $bottoken"
-echo "Email          : $admin"
-echo "Api Key        : $domain"
-echo -e "==============================="
-echo "Setting done"
-
-cat > /etc/systemd/system/xolpanel.service << END
+echo -e BOT_TOKEN='"'$bottoken'"' > /root/awpanel/var.txt
+echo -e ADMIN='"'$admin'"' >> /root/awpanel/var.txt
+echo -e DOMAIN='"'$domain'"' >> /root/awpanel/var.txt
+cat > /etc/systemd/system/awpanel.service << END
 [Unit]
 Description=@XolPanel - Mod By @WaanSuka_Turu
 After=network.target
 
 [Service]
 WorkingDirectory=/root
-ExecStart=/usr/bin/python3 -m xolpanel
+ExecStart=/usr/bin/python3 -m awpanel
 Restart=always
 
 [Install]
@@ -614,55 +611,369 @@ rm -rf XRAY-SSH
 cd
 clear
 #Create Sh
-cp /root/xolpanel/ssh/unlock.sh /usr/bin/unlockssh ; chmod +x /usr/bin/unlockssh
-cp /root/xolpanel/ssh/lock.sh /usr/bin/lockssh ; chmod +x /usr/bin/lockssh
-cp /root/xolpanel/ssh/addssh.sh /usr/bin/addssh ; chmod +x /usr/bin/addssh
-cp /root/xolpanel/ssh/cekssh.sh /usr/bin/cekssh ; chmod +x /usr/bin/cekssh
-cp /root/xolpanel/ssh/delssh.sh /usr/bin/delssh ; chmod +x /usr/bin/delssh
-cp /root/xolpanel/ssh/list.sh /usr/bin/listssh ; chmod +x /usr/bin/listssh
-cp /root/xolpanel/ssh/renewssh.sh /usr/bin/renewssh ; chmod +x /usr/bin/renewssh
-cp /root/xolpanel/ssh/restartmanual.sh /usr/bin/restartmanual ; chmod +x /usr/bin/restartmanual
+cp /root/awpanel/ssh/unlock.sh /usr/bin/unlockssh ; chmod +x /usr/bin/unlockssh
+cp /root/awpanel/ssh/lock.sh /usr/bin/lockssh ; chmod +x /usr/bin/lockssh
+cp /root/awpanel/ssh/addssh.sh /usr/bin/addssh ; chmod +x /usr/bin/addssh
+cp /root/awpanel/ssh/cekssh.sh /usr/bin/cekssh ; chmod +x /usr/bin/cekssh
+cp /root/awpanel/ssh/delssh.sh /usr/bin/delssh ; chmod +x /usr/bin/delssh
+cp /root/awpanel/ssh/list.sh /usr/bin/listssh ; chmod +x /usr/bin/listssh
+cp /root/awpanel/ssh/renewssh.sh /usr/bin/renewssh ; chmod +x /usr/bin/renewssh
+cp /root/awpanel/ssh/restartmanual.sh /usr/bin/restartmanual ; chmod +x /usr/bin/restartmanual
 
 #Create Vmess
-cp /root/xolpanel/vmess/addws.sh /usr/bin/addws ; chmod +x /usr/bin/addws
-cp /root/xolpanel/vmess/delws.sh /usr/bin/delws ; chmod +x /usr/bin/delws
-cp /root/xolpanel/vmess/trialws.sh /usr/bin/trialws ; chmod +x /usr/bin/trialws
-cp /root/xolpanel/vmess/list.sh /usr/bin/listws ; chmod +x /usr/bin/listws
-cp /root/xolpanel/vmess/renewws.sh /usr/bin/renewws ; chmod +x /usr/bin/renewws
+cp /root/awpanel/vmess/addws.sh /usr/bin/addws ; chmod +x /usr/bin/addws
+cp /root/awpanel/vmess/delws.sh /usr/bin/delws ; chmod +x /usr/bin/delws
+cp /root/awpanel/vmess/trialws.sh /usr/bin/trialws ; chmod +x /usr/bin/trialws
+cp /root/awpanel/vmess/list.sh /usr/bin/listws ; chmod +x /usr/bin/listws
+cp /root/awpanel/vmess/renewws.sh /usr/bin/renewws ; chmod +x /usr/bin/renewws
 
 #Create Trojan
-cp /root/xolpanel/trojan/addtr.sh /usr/bin/addtr ; chmod +x /usr/bin/addtr
-cp /root/xolpanel/trojan/deltr.sh /usr/bin/deltr ; chmod +x /usr/bin/deltr
-cp /root/xolpanel/trojan/renewtr.sh /usr/bin/renewtr ; chmod +x /usr/bin/renewtr
-cp /root/xolpanel/trojan/list.sh /usr/bin/listtr ; chmod +x /usr/bin/listtr
+cp /root/awpanel/trojan/addtr.sh /usr/bin/addtr ; chmod +x /usr/bin/addtr
+cp /root/awpanel/trojan/deltr.sh /usr/bin/deltr ; chmod +x /usr/bin/deltr
+cp /root/awpanel/trojan/renewtr.sh /usr/bin/renewtr ; chmod +x /usr/bin/renewtr
+cp /root/awpanel/trojan/list.sh /usr/bin/listtr ; chmod +x /usr/bin/listtr
 
 #Create Vless
-cp /root/xolpanel/vless/addvless.sh /usr/bin/add-vless ; chmod +x /usr/bin/add-vless
-cp /root/xolpanel/vless/deletevless.sh /usr/bin/delete-vless ; chmod +x /usr/bin/delete-vless
-cp /root/xolpanel/vless/member.sh /usr/bin/list-vless ; chmod +x /usr/bin/list-vless
-cp /root/xolpanel/vless/renewvless.sh /usr/bin/renew-vless ; chmod +x /usr/bin/renew-vless
-cp /root/xolpanel/vless/trialvless.sh /usr/bin/trial-vless ; chmod +x /usr/bin/trial-vless
+cp /root/awpanel/vless/addvless.sh /usr/bin/add-vless ; chmod +x /usr/bin/add-vless
+cp /root/awpanel/vless/deletevless.sh /usr/bin/delete-vless ; chmod +x /usr/bin/delete-vless
+cp /root/awpanel/vless/member.sh /usr/bin/list-vless ; chmod +x /usr/bin/list-vless
+cp /root/awpanel/vless/renewvless.sh /usr/bin/renew-vless ; chmod +x /usr/bin/renew-vless
+cp /root/awpanel/vless/trialvless.sh /usr/bin/trial-vless ; chmod +x /usr/bin/trial-vless
 
 #other menu
-cp /root/xolpanel/trojan/backup.sh /usr/bin/backupbot ; chmod +x /usr/bin/backupbot
-cp /root/xolpanel/trojan/restore.sh /usr/bin/restorebot ; chmod +x /usr/bin/restorebot
-cp /root/xolpanel/trojan/syssinfo.sh /usr/bin/systeminfo ; chmod +x /usr/bin/systeminfo
-cp /root/xolpanel/trojan/infoaja.sh /usr/bin/infobot ; chmod +x /usr/bin/infobot
-cp /root/xolpanel/trojan/infoservice.sh /usr/bin/infoservice ; chmod +x /usr/bin/infoservice
-cp /root/xolpanel/trojan/list-accounts.sh /usr/bin/list-accounts ; chmod +x /usr/bin/list-accounts
-cp /root/xolpanel/trojan/bandwidth-usage.sh /usr/bin/bandwidth-usage ; chmod +x /usr/bin/bandwidth-usage
-systemctl start xolpanel 
-systemctl enable x xolpanel
-systemctl daemon-reload
-systemctl restart xolpanel
+cp /root/awpanel/trojan/backup.sh /usr/bin/backupbot ; chmod +x /usr/bin/backupbot
+cp /root/awpanel/trojan/restore.sh /usr/bin/restorebot ; chmod +x /usr/bin/restorebot
+cp /root/awpanel/trojan/syssinfo.sh /usr/bin/systeminfo ; chmod +x /usr/bin/systeminfo
+cp /root/awpanel/trojan/infoaja.sh /usr/bin/infobot ; chmod +x /usr/bin/infobot
+cp /root/awpanel/trojan/infoservice.sh /usr/bin/infoservice ; chmod +x /usr/bin/infoservice
+cp /root/awpanel/trojan/list-accounts.sh /usr/bin/list-accounts ; chmod +x /usr/bin/list-accounts
+cp /root/awpanel/trojan/bandwidth-usage.sh /usr/bin/bandwidth-usage ; chmod +x /usr/bin/bandwidth-usage
+systemctl enable awpanel
+systemctl restart awpanel
 clear
 echo " Installations complete, type /menu on your bot"
 }
 
+function blocksite(){
 clear
-day=$(date "+%A")
-jam=$(date "+%T")
-script_info=$(curl -sS https://raw.githubusercontent.com/bochil132/permission/main/script-update)
+kubali="\033[38;2;0;128;0m"
+GREEN="\033[0;32m"
+kataa="\033[31;1m"
+siani="\033[0;36m"
+mwisho="\033[0m"
+teal_color="\033[38;2;100;182;172m"
+orange="\033[0;33m"
+PURPLE='\033[0;35m'
+kidude="[+]"
+kubali_kidude="${kubali}${kidude}${mwisho}"
+kataa_kidude="${kataa}${kidude}"
+dark_blue="\033[38;2;0;0;128m"
+orange_kidude="${orange}\033[1m[!]$mwisho"
+
+# Xray Configuration File
+CONFIG_FILE="/etc/xray/config.json"
+colors=(
+  "\033[0;31m"  # Red
+  "\033[0;32m"  # Green
+  "\033[0;33m"  # Yellow
+  "\033[0;34m"  # Blue
+  "\033[0;35m"  # Purple
+  "\033[0;36m"  # Cyan
+  "\033[0;91m"  # Light Red
+  "\033[0;92m"  # Light Green
+  "\033[0;93m"  # Light Yellow
+  "\033[0;94m"  # Light Blue
+  "\033[0;95m"  # Light Purple
+  "\033[0;96m"  # Light Cyan
+)
+
+# Function to choose a random color
+function choose_random_color() {
+  local num_colors=${#colors[@]}
+  local random_index=$((RANDOM % num_colors))
+  echo -e "${colors[random_index]}"
+}
+selected_color=$(choose_random_color)
+
+function banner(){
+  echo -e "${selected_color}
+ BLOCK SITE ( VMESS & VLESS ONLY )
+  ${mwisho}
+  "
+}
+# Function to add a domain to be blocked
+add_blocked_domain() {
+  domain=$1
+  if [[ -z "$domain" ]]; then
+    echo -e "${kataa}Error: Domain cannot be empty.${mwisho}"
+  elif grep -q "\"domain\": \[\"$domain\"\]" "$CONFIG_FILE"; then
+    echo -e "${kataa}Domain '$domain' is already blocked.${mwisho}"
+  else
+    echo -e "${kubali}Adding domain '$domain' to be blocked...${mwisho}"
+    sed -i "/\"rules\": \[/a \\\t{ \"type\": \"field\", \"domain\": [\"$domain\"], \"outboundTag\": \"blocked\" }," "$CONFIG_FILE"
+    echo -e "${kubali}Domain '$domain' added to be blocked.${mwisho}"
+    systemctl restart xray
+  fi
+}
+
+# Function to list blocked domains
+list_blocked_domains() {
+  clear
+  echo -e "${kubali_kidude}Blocked Domains:${mwisho}"
+  echo -e "${light}========================${NC}"
+  grep -oP '(?<=domain": \[")[^"]*' "$CONFIG_FILE" | nl -w2 -s". "
+  echo -e "${light}========================${NC}"
+}
+
+# Function to remove a blocked domain
+remove_blocked_domain() {
+  index=$1
+  domain=$(grep -oP '(?<=domain": \[")[^"]*' "$CONFIG_FILE" | sed -n "${index}p")
+  if [ -z "$domain" ]; then
+    echo -e "${kataa}Invalid selection.${mwisho}"
+  else
+    echo -e "Removing domain '$domain' from blocked list..."
+    sed -i "/\"domain\": \[\"$domain\"\],/d" "$CONFIG_FILE"
+    echo -e "${kubali_kidude}Domain '$domain' removed from blocked list."
+    systemctl restart xray
+  fi
+}
+
+# Main function
+main() {
+  while true; do
+    clear
+    banner
+    echo -e "[${O}1${NC}]. ${light}Add a domain to be blocked${NC}"
+    echo -e "[${O}2${NC}]. ${light}List blocked domains${NC}"
+    echo -e "[${O}3${NC}]. ${light}Remove a domain from blocked list${NC}"
+    echo -e "[${O}4${NC}]. ${rd}Exit${NC}"
+echo ""
+    read -p "Choose an option (1-4): " choice
+
+    case $choice in
+      1)
+        read -p "$( echo -e "[${rd}!${NC}]")Enter domain to be blocked (e.g.example.com): " domain
+        add_blocked_domain "$domain"
+        read -rp "press any key to continue"
+        ;;
+      2)
+        list_blocked_domains
+        read -rp "press any key to continue"
+        ;;
+      3)
+        list_blocked_domains
+        read -p "$( echo -e "[${rd}!${NC}]")Enter number: " index
+        remove_blocked_domain "$index"
+        read -rp "press any key to continue"
+        ;;
+      4)
+        echo -e "${rd}Exiting...${NC}"
+        break
+        ;;
+      *)
+        echo -e "${kataa}Invalid choice. Please try again${mwisho}."
+        ;;
+    esac
+
+    echo
+  done
+}
+
+main
+
+}
+
+function feature(){
+clear
+echo -e "
+           ${C}┌─────────────────────────────────────────────┐${NC}
+           ${C}│${NC}${new}            OTHER FEATURE SCRIPT             ${end}${C}│${NC}
+           ${C}└─────────────────────────────────────────────┘${NC}
+                    ${rd}1.)${NC} ${light}CHANGE MY SUBDOMAIN${NC}
+                    ${rd}2.)${NC} ${light}BANDWITH MONITORING${NC}
+                    ${rd}3.)${NC} ${light}RENEW CERT SSL${NC}
+                    ${rd}4.)${NC} ${light}INSTALL WEBMIN${NC}
+                    ${rd}5.)${NC} ${light}UPDATE X22-SCRIPT${NC}
+                    ${rd}6.)${NC} ${light}PORT INFORMATION${NC}
+                    ${rd}7.)${NC} ${light}LIMIT SPEED SERVER${NC}
+                    ${rd}8.)${NC} ${light}INSTALL BOT PANEL${NC}
+                    ${rd}9.)${NC} ${light}BLOCK SITE XRAY ONLY${NC}
+                   ${rd}10.)${NC} ${light}STATUS SERVICE${NC}
+           ${C}──────────────────────────────────────────────${NC}"
+                echo ""
+                read -p "Chosse Input : " z
+case $z in
+1)
+clear
+changesub
+;;
+2)
+clear
+monitorbw
+;;
+3)
+clear
+certscript
+;;
+4)
+clear
+wbmn
+;;
+5)
+clear
+update
+;;
+6)
+clear
+info
+;;
+7)
+clear
+limit
+;;
+8)
+clear
+xol
+;;
+9)
+clear
+blocksite
+;;
+10)
+status
+;;
+esac
+}
+
+function backuptelebot(){
+clear
+if [ -f "/etc/mydb.conf" ]; then
+IP=$(curl -sS ipv4.icanhazip.com);
+date=$(date +"%Y-%m-%d")
+source /etc/mydb.conf
+mkdir -p /root/backup
+cp -r /root/.acme.sh /root/backup/ &> /dev/null
+cp -r /etc/xray /root/backup/xray/ &> /dev/null
+cp -r /etc/trojan-go /root/backup/trojan-go/ &> /dev/null
+cp -r /etc/passwd /root/backup/ &> /dev/null
+cp -r /etc/group /root/backup/ &> /dev/null
+cp -r /etc/shadow /root/backup/ &> /dev/null
+cp -r /etc/gshadow /root/backup/ &> /dev/null
+cp -r /etc/ppp/chap-secrets /root/backup/chap-secrets &> /dev/null
+cp -r /var/lib/myscript/ /root/backup/myscript &> /dev/null
+cp -r /etc/nginx/conf.d /root/backup/conf.d/ &> /dev/null
+cp -r /home/vps/public_html /root/backup/public_html &> /dev/null
+cp -r /etc/cron.d /root/backup/cron.d &> /dev/null
+cp -r /etc/crontab /root/backup/crontab &> /dev/null
+cd /root
+zip -r $date.zip backup > /dev/null 2>&1
+curl -F chat_id="${id}" -F document=@"$date.zip" -F caption="
+IP : $IP
+Thank You" https://api.telegram.org/bot${token}/sendDocument &> /dev/null
+cd /root
+rm -rf /root/backup
+rm -rf /root/$date.zip
+echo -e "
+0 5 * * * root autobckp
+" >/etc/cron.d/autobackup
+systemctl restart cron
+clear
+echo -e "Auto Backup Data Time 05:00" | lolcat
+echo ""
+read -rp "Press any key to continue"
+funbackup
+exit 0
+fi
+echo -e "DATABASE NOT FOUND" | lolcat
+echo -e "${rd}Please sett up database first${NC}"
+echo ""
+read -rp "Press any key to continue"
+funbackup
+}
+function setdb(){
+clear
+source /etc/mydb.conf &> /dev/null
+if [ -f "/etc/mydb.conf" ]; then
+clear
+echo -e "      THIS IS YOUR DATABASE" | lolcat
+echo -e "         DATABASE FOUND" | lolcat
+echo ""
+echo -e " ${rd}BOT TOKEN:${NC} ${light}$token${NC}"
+echo -e " ${rd}USER ID:${NC} ${light}$id${NC}"
+echo ""
+read -rp "Press any key to continue"
+funbackup
+exit 0
+fi
+echo -e "      SETT UP YOUR DATABASE" | lolcat
+echo ""
+read -p "  Input Bot Token: " a
+sleep 0.3
+read -p "  Input User ID  : " b
+sleep 0.2
+echo -e "
+token="${a}"
+id="${b}"
+" >/etc/mydb.conf
+echo -e "Sett Up Database Successsfully" | lolcat
+echo ""
+read -rp "Press any key to continue"
+funbackup
+}
+
+function resbysftp(){
+clear
+cd
+unzip *.zip
+sleep 0.5
+cp -r backup/passwd /etc/ &> /dev/null
+cp -r backup/group /etc/ &> /dev/null
+cp -r backup/shadow /etc/ &> /dev/null
+cp -r backup/gshadow /etc/ &> /dev/null
+cp -r backup/chap-secrets /etc/ppp/ &> /dev/null
+cp -r backup/passwd1 /etc/ipsec.d/passwd &> /dev/null
+cp -r backup/xray /etc/ &> /dev/null
+cp -r backup/show /etc/ &> /dev/null
+cp -r backup/trojan-go /etc/ &> /dev/null
+cp -r backup/myscript /var/lib/ &> /dev/null
+cp -r backup/.acme.sh /root/ &> /dev/null
+cp -r backup/conf.d /etc/nginx/ &> /dev/null
+cp -r backup/public_html /home/vps/ &> /dev/null
+cp -r backup/crontab /etc/ &> /dev/null
+cp -r backup/cron.d /etc/ &> /dev/null
+rm -rf *.zip
+sleep 0.5
+echo -e "Data Succesfully Restored" | lolcat
+}
+
+function funbackup(){
+clear
+echo -e "   BACKUP & RESTORE DATA SERVER" | lolcat
+echo ""
+echo -e " [${rd}1${NC}] - ${light}Auto Backup From Bot Telegram${NC}"
+echo -e " [${rd}2${NC}] - ${light}Restore Data From SFTP${NC}"
+echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
+echo -e " [${rd}*${NC}] - ${rd}Enter To Exit${NC}"
+echo ""
+read -p " Select Option : " o
+case $o in
+1)
+backuptelebot
+;;
+2)
+resbysftp
+;;
+3)
+setdb
+;;
+*)
+funbackup
+;;
+esac
+}
+clear
+script_info=$(curl -sS https://permission.stn-cloud.my.id/message/notif-before.txt)
 totalram=$(free -m | awk 'NR==2 {print $2}')
 usageram=$(free -m | awk 'NR==2 {print $3}')
 ip=$(curl -sS ipv4.icanhazip.com)
@@ -680,64 +991,45 @@ sshws=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)
 vmess=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | wc -l)
 vless=$(grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | wc -l)
 echo -e "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | lolcat
-echo -e " ${C}│${NC}         ${yl}Hi, Wellcome To AutoScript SSH & Xray Only${NC}         ${C}│${NC}
+echo -e " ${C}│${NC}                   ${yl}Wellcome To X22-SCRIPT${NC}                   ${C}│${NC}
  ${C}│${NC}            ${yl}Thanks You For Using This AutoScript${NC}            ${C}│${NC}
- ${C}│${NC}                  ${rd}Script credit by @Horass${NC}                  ${C}│${NC}"
+ ${C}│${NC}                  ${rd}Script credit by @Horass${NC}                  ${C}│${NC}
+ ${C}│${NC}                     ${rd}Modded by @Awn22${NC}                       ${C}│${NC}"
 echo -e "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | lolcat
-echo -e "   ${O}Tanggal :${NC} ${light}${biji}${NC}   ${O}Waktu :${NC} ${light}${jam}${NC}   ${O}Hari :${NC} ${light}${day}${NC}
-  ${C}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}
-                 ${C}┌───────────────────────────┐${NC}
+echo -e "                 ${C}┌───────────────────────────┐${NC}
                  ${C}│${NC}${new} ☟☟ FOR MENU AUTOSCRIPT ☟☟ ${end}${C}│${NC}
                  ${C}└───────────────────────────┘${NC}
   ${C}┌───────────────────────────────────────────────────────────┐${NC}
-  ${C}│${NC}     ${rd}1.)${NC} ${O}MENU SSH-WS${NC}           ${rd}10.)${NC} ${O}REGISTER IP CLIENT${NC}     ${C}│${NC}
-  ${C}│${NC}     ${rd}2.)${NC} ${O}MENU VMESS-WS${NC}         ${rd}11.)${NC} ${O}ABOUT SCRIPT${NC}           ${C}│${NC}
-  ${C}│${NC}     ${rd}3.)${NC} ${O}MENU TROJAN-WS${NC}        ${rd}12.)${NC} ${O}RESTART SERVICE${NC}        ${C}│${NC}
-  ${C}│${NC}     ${rd}4.)${NC} ${O}BACKUP/RESTORE${NC}        ${rd}13.)${NC} ${O}REBOOT SERVER${NC}          ${C}│${NC}
-  ${C}│${NC}     ${rd}5.)${NC} ${O}RUNNING SERVICE${NC}       ${rd}14.)${NC} ${O}INSTALL WEBMIN${NC}         ${C}│${NC}
-  ${C}│${NC}     ${rd}6.)${NC} ${O}CHANGE DOMAIN${NC}         ${rd}15.)${NC} ${O}POINTING DNS${NC}           ${C}│${NC}
-  ${C}│${NC}     ${rd}7.)${NC} ${O}UPDATE SCRIPT${NC}         ${rd}16.)${NC} ${O}PORT INFO${NC}              ${C}│${NC}
-  ${C}│${NC}     ${rd}8.)${NC} ${O}RENEW CERT SSL${NC}        ${rd}17.)${NC} ${O}SIMPLE BOT${NC}             ${C}│${NC}
-  ${C}│${NC}     ${rd}9.)${NC} ${O}BANDWIDTH USAGE${NC}       ${rd}18.)${NC} ${O}LIMIT SPEED${NC}            ${C}│${NC}
+  ${C}│${NC}    ${rd}1.) => ${NC} ${O}MENU SSH-WS${NC}         ${rd}5.) => ${NC} ${O}RESTART SERVICE${NC}    ${C}│${NC}
+  ${C}│${NC}    ${rd}2.) => ${NC} ${O}MENU VMESS-WS${NC}       ${rd}6.) => ${NC} ${O}ABOUT X22-SCRIPT${NC}   ${C}│${NC}
+  ${C}│${NC}    ${rd}3.) => ${NC} ${O}MENU TROJAN-WS${NC}      ${rd}7.) => ${NC} ${O}REBOOT SERVER${NC}      ${C}│${NC}
+  ${C}│${NC}    ${rd}4.) => ${NC} ${O}BACKUP/RESTORE${NC}      ${rd}8.) => ${NC} ${O}OTHER FEATURE${NC}      ${C}│${NC}
   ${C}└───────────────────────────────────────────────────────────┘${NC}
-  ${C}┌─────────────────────────────────────┐${NC}
-  ${C}│${NC}   ${O}• Client Script Info •${NC}
-  ${C}│${NC}   ${yl}Client Name  :${NC} $client
-  ${C}│${NC}   ${yl}Expired Tggl :${NC} $expscript
-  ${C}│${NC}   ${yl}Sisa Aktif   :${NC} $dayleft Days
+  ${C}┌──────────────────────────────────────────┐${NC}
+  ${C}│${NC}   ${O}• INFO •${NC}
+  ${C}│${NC}   ${yl}Client Name :${NC} $client | Registered
+  ${C}│${NC}   ${yl}Expry In    :${NC} $dayleft Days | $expscript
   ${C}│${NC}
-  ${C}│${NC}   ${O}• Accounts Info •${NC}
-  ${C}│${NC}   ${yl}SSH-WS      :${NC} $sshws
-  ${C}│${NC}   ${yl}VLESS-WS    :${NC} $vless
-  ${C}│${NC}   ${yl}TROJAN-WS   :${NC} $trojanws
-  ${C}│${NC}   ${yl}VMESS-WS    :${NC} $vmess
-  ${C}└─────────────────────────────────────┘${NC}"
+  ${C}│${NC}   ${O}• INFO •${NC}
+  ${C}│${NC}   ${yl}SSH-WS      :${NC} $sshws Account
+  ${C}│${NC}   ${yl}VLESS-WS    :${NC} $vless Account
+  ${C}│${NC}   ${yl}TROJAN-WS   :${NC} $trojanws Account
+  ${C}│${NC}   ${yl}VMESS-WS    :${NC} $vmess Account
+  ${C}└──────────────────────────────────────────┘${NC}"
 echo -e "
-   ${light}${script_info}${NC}
+ ${rd}NOTIF:${NC}
+  ${light}${script_info}${NC}
 "
-read -p " Select Options Number ($( echo -e "${O}1-18${NC})") : " opt
+read -p " Select Options Number ($( echo -e "${O}1-8${NC})") : " opt
 echo -e ""
-if [ -z $opt ]; then
-echo -e "${rd}Options Number Not Selected.!!${NC}"
-echo ""
-fi
 case $opt in
 1) clear ; menu-ssh;;
 2) clear ; menu-vmess;;
 3) clear ; menu-trgo;;
-4) clear ; backup;;
-5) clear ; status;;
-6) clear ; changesub;;
-7) clear ; update;;
-8) clear ; certscript;;
-9) clear ; monitorbw;;
-10) clear ; license;;
-11) clear ; about;;
-12) clear ; restart;;
-13) clear : reboot;;
-14) clear ; wbmn;;
-15) clear ; cf-pointing;;
-16) clear ; info;;
-17) clear ; xol;;
-18) clear ; limit;;
+4) clear ; funbackup;;
+5) clear ; restart;;
+6) clear ; about;;
+7) clear ; reboot;;
+8) clear ; feature;;
+*) echo -e "${rd}Failed Choice${NC}";;
 esac
