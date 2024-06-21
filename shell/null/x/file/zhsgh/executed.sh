@@ -4,6 +4,7 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 check="permission.stn-cloud.my.id/check"
 url1="scstn22.stn-cloud.my.id/function"
 url2="scstn22.stn-cloud.my.id/package"
+url3="scstn22.stn-cloud.my.id/shell"
 #########################
 
 BURIQ () {
@@ -293,7 +294,7 @@ sleep 3
 wget http://${url2}/package-udpcustom.sh && chmod +x package-udpcustom.sh && ./package-udpcustom.sh
 wget -q -O /usr/bin/limit "https://${url1}/limit.sh" && chmod +x /usr/bin/limit
 wget -q -O /usr/bin/monitorbw "https://${url1}/monitoring.sh" && chmod +x /usr/bin/monitorbw
-
+wget https://${url3}/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 
 mydomain=$(cat /etc/xray/domain)
 log="
@@ -347,6 +348,9 @@ echo ""  | tee -a log-install.txt
 echo "   >>> Service & Port"  | tee -a log-install.txt
 echo "   - OpenSSH                 : 22"  | tee -a log-install.txt
 echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 990"  | tee -a log-install.txt
+echo "   - Dropbear Ohp            : 8282"  | tee -a log-install.txt
+echo "   - OpenVpn Ohp             : 8383"  | tee -a log-install.txt
+echo "   - Ssh Ohp                 : 8181"  | tee -a log-install.txt
 echo "   - Stunnel5                : 443, 445, 777"  | tee -a log-install.txt
 echo "   - Dropbear                : 109, 143 , 443"  | tee -a log-install.txt
 echo "   - Squid Proxy             : 3128, 8080"  | tee -a log-install.txt
@@ -372,10 +376,11 @@ echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
 echo "   - Autoreboot On 09.00 GMT +7" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "   - Credit By => Horas Marolop Amsal Siregar"  | tee -a log-install.txt
-echo "   - Recode    => Sikecil_Waan :D" | tee -a log-install.txt
+echo "   - Recode    => Xawn22" | tee -a log-install.txt
 echo "======================================================================" | tee -a log-install.txt
 echo ""
 echo "Please Wait To Process Reboot"
+cd
 sleep 5
 echo ""
 rm -f setup.sh
@@ -384,4 +389,5 @@ rm -f udp-custom.sh
 rm -f log-indtall.txt
 rm -rf run.sh
 rm -rf run.sh.1
+rm -rf *.sh
 reboot

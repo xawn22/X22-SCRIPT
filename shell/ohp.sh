@@ -16,7 +16,7 @@ off='\x1b[m'
 clear
 
 # Download File Ohp
-wget https://github.com/lfasmpao/open-http-puncher/releases/download/0.1/ohpserver-linux32.zip
+wget https://scstn22.stn-cloud.my.id/shell/ohp-server/ohpserver-linux32.zip
 unzip ohpserver-linux32.zip
 chmod +x ohpserver
 cp ohpserver /usr/local/bin/ohpserver
@@ -48,7 +48,7 @@ END
 cat > /etc/systemd/system/dropbear-ohp.service << END
 [Unit]]
 Description=Dropbear OHP Redirection Service
-Documentation=https://t.me/fer1dev
+Documentation=https://t.me/WaanSuka_Turu
 After=network.target nss-lookup.target
 
 [Service]
@@ -69,7 +69,7 @@ END
 cat > /etc/systemd/system/openvpn-ohp.service << END
 [Unit]]
 Description=OpenVPN OHP Redirection Service
-Documentation=https://t.me/Akbar218
+Documentation=https://t.me/WaanSuka_Turu
 After=network.target nss-lookup.target
 
 [Service]

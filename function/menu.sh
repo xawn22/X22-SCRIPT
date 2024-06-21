@@ -58,6 +58,9 @@ sqd=$(systemctl status squid | grep Active | awk '{print $3}' | cut -d "(" -f2 |
 nginx=$(systemctl status nginx | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 osslh=$(systemctl status sslh | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 udpsts=$(systemctl status udp-custom | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+shohp=$(systemctl status ssh-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+dropohp=$(systemctl status dropbear-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+opohp=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 
 # COLOR VALIDATION
 RED='\033[0;31m'
@@ -234,6 +237,27 @@ else
    udp="${RED}OFF ( Error )${NC}"
 fi
 
+# STATUS SSH OHP
+if [[ ${shohp} == "running" ]]; then
+   ssh_ohp="${GREEN}ON ( Running )${NC}"
+else
+   ssh_ohp="${RED}OFF ( Error )${NC}"
+fi
+
+# STATUS DROPBEAR OHP
+if [[ ${dropohp} == "running" ]]; then
+   dropbear_ohp="${GREEN}ON ( Running )${NC}"
+else
+   dropbear_ohp="${RED}OFF ( Error )${NC}"
+fi
+
+# STATUS OPENVPN OHP
+if [[ ${opohp} == "running" ]]; then
+   openvpn_ohp="${GREEN}ON ( Running )${NC}"
+else
+   openvpn_ohp="${RED}OFF ( Error )${NC}"
+fi
+
 echo -e ""
 clear
 loadcpu=$(printf '%-0.00001s' "$(top -bn1 | awk '/Cpu/ { cpu = "" 100 - $8 "%" }; END { print cpu }')")
@@ -278,6 +302,9 @@ echo -e " ${green}•${NC} BADVPN UDPGW                 = $udpw !"
 echo -e " ${green}•${NC} CRONTAB                      = $cr !"
 echo -e " ${green}•${NC} SQUID PROXY                  = $sq !"
 echo -e " ${green}•${NC} SSH UDP                      = ${udp} !"
+echo -e " ${green}•${NC} DROPBEAR OHP                 = ${dropbear_ohp} !"
+echo -e " ${green}•${NC} OPENVPN OHP                  = ${openvpn_ohp} !"
+echo -e " ${green}•${NC} SSH OHP                      = ${ssh_ohp} !"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e ""
 read -n 1 -s -r -p "Tap Enter To Back Home-Menu"
@@ -800,6 +827,8 @@ echo -e "
                     ${rd}8.)${NC} ${light}INSTALL BOT PANEL${NC}
                     ${rd}9.)${NC} ${light}BLOCK SITE XRAY ONLY${NC}
                    ${rd}10.)${NC} ${light}STATUS SERVICE${NC}
+
+                    ${rd}x.)${NC} ${rd}Enter To Back Menu{NC}
            ${C}──────────────────────────────────────────────${NC}"
                 echo ""
                 read -p "Chosse Input : " z
@@ -842,6 +871,9 @@ blocksite
 ;;
 10)
 status
+;;
+*)
+menu
 ;;
 esac
 }
