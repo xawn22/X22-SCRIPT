@@ -634,7 +634,7 @@ Restart=always
 WantedBy=multi-user.target
 END
 
-rm -rf XRAY-SSH
+rm -rf X22-SCRIPT
 cd
 clear
 #Create Sh

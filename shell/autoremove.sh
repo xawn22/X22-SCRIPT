@@ -1,8 +1,7 @@
 #!/bin/bash
-KEY='6296920647:AAH1ZmEzgCZnlL6QpeIXhOUz7l3mVUaxw4c'
-CHATID=$(cat /etc/bckp-bot/userid.conf)
+source /root/awpanel/var.txt
 TIME="10"
-URL="https://api.telegram.org/bot$KEY/sendMessage"
+URL="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
 #Autoremove expired accounts for Xray Vless
 data=( `cat /etc/xray/config.json | grep '^#&&#' | cut -d ' ' -f 2 | sort | uniq`);
 now=`date +"%Y-%m-%d"`
@@ -16,18 +15,21 @@ if [[ "$exp2" -le "0" ]]; then
 sed -i "/^#&&# $user $exp/,/^},{/d" /etc/xray/config.json
 sed -i "/^#&&# $user $exp/,/^},{/d" /etc/xray/config.json
 LogVless="
-<b>User Vless Expired</b>
-===========================
+<b>⚠️User Vless Expired⚠️</b>
+━━━━━━━━━━━━━━━━━━━━━
+<i>Host : ${DOMAIN}</i>
 <i>User : $user</i>
 <i>Exp  : $exp</i>
-===========================
+━━━━━━━━━━━━━━━━━━━━━
+<b>Thank You For Order</b>
 "
-curl -s --max-time ${TIME} -d "chat_id=${CHATID}&disable_web_page_preview=1&text=$LogVless&parse_mode=html" ${URL} >/dev/null
+curl -s --max-time ${TIME} -d "chat_id=${ADMIN}&disable_web_page_preview=1&text=$LogVless&parse_mode=html" ${URL} >/dev/null
 rm -f /etc/xray/$user-tls.json /etc/xray/$user-none.json
 rm -f /home/vps/public_html/vless-$user.txt
 fi
 done
 systemctl restart xray
+systemctl restart nginx
 
 #Autoremove expired accounts for Xray Vmess
 data=( `cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | sort | uniq`);
@@ -42,18 +44,21 @@ if [[ "$exp2" -le "0" ]]; then
 sed -i "/^### $user $exp/,/^},{/d" /etc/xray/config.json
 sed -i "/^### $user $exp/,/^},{/d" /etc/xray/config.json
 LogVmess="
-<b>User Vmess Expired</b>
-===========================
+<b>⚠️User Vmess Expired⚠️</b>
+━━━━━━━━━━━━━━━━━━━━━
+<i>Host : ${DOMAIN}</i>
 <i>User : $user</i>
 <i>Exp  : $exp</i>
-===========================
+━━━━━━━━━━━━━━━━━━━━━
+<b>Thank You For Order</b>
 "
-curl -s --max-time ${TIME} -d "chat_id=${CHATID}&disable_web_page_preview=1&text=$LogVmess&parse_mode=html" ${URL} >/dev/null
+curl -s --max-time ${TIME} -d "chat_id=${ADMIN}&disable_web_page_preview=1&text=$LogVmess&parse_mode=html" ${URL} >/dev/null
 rm -f /etc/xray/$user-tls.json /etc/xray/$user-none.json
 rm -f /home/vps/public_html/vmess-$user.txt
 fi
 done
 systemctl restart xray
+systemctl restart nginx
 
 #Autoremove expired accounts for Trojan Go
 data=( `cat /etc/trojan-go/akun.conf | grep '^###' | cut -d ' ' -f 2`);
@@ -65,20 +70,23 @@ d1=$(date -d "$exp" +%s)
 d2=$(date -d "$now" +%s)
 exp2=$(( (d1 - d2) / 86400 ))
 if [[ "$exp2" = "0" ]]; then
-sed -i "/^### $user $exp/,/^},{/d" /etc/trojan-go/akun.Config
+sed -i "/^### $user $exp/,/^},{/d" /etc/trojan-go/akun.conf
 sed -i '/^,"'"$user"'"$/d' /etc/trojan-go/config.json
 LogTrojanGo="
-<b>User TrojanGo Expired</b>
-===========================
+<b>⚠️User TrojanGo Expired⚠️</b>
+━━━━━━━━━━━━━━━━━━━━━
+<i>Host : ${DOMAIN}</i>
 <i>User : $user</i>
 <i>Exp  : $exp</i>
-===========================
+━━━━━━━━━━━━━━━━━━━━━
+<b>Thank You For Order</b>
 "
-curl -s --max-time ${TIME} -d "chat_id=${CHATID}&disable_web_page_preview=1&text=$LogTrojanGo&parse_mode=html" ${URL} >/dev/null
+curl -s --max-time ${TIME} -d "chat_id=${ADMIN}&disable_web_page_preview=1&text=$LogTrojanGo&parse_mode=html" ${URL} >/dev/null
 rm -f /home/vps/public_html/trojanGO-$user.txt
 fi
 done
 systemctl restart trojan-go
+systemctl restart nginx
 
 #Autoremove expired accounts for ssh
 hariini=`date +%d-%m-%Y`
@@ -109,13 +117,15 @@ hariini=`date +%d-%m-%Y`
                else
                userdel $username
 LogSsh="
-<b>User Ssh Expired</b>
-===========================
+<b>⚠️User Ssh Expired⚠️</b>
+━━━━━━━━━━━━━━━━━━━━━
+<i>Host : ${DOMAIN}</i>
 <i>User : $username</i>
 <i>Exp  : $tgl $bulantahun</i>
-===========================
+━━━━━━━━━━━━━━━━━━━━━
+<b>Thank You For Order</b>
 "
-curl -s --max-time ${TIME} -d "chat_id=${CHATID}&disable_web_page_preview=1&text=$LogSsh&parse_mode=html" ${URL} >/dev/null
+curl -s --max-time ${TIME} -d "chat_id=${ADMIN}&disable_web_page_preview=1&text=$LogSsh&parse_mode=html" ${URL} >/dev/null
                fi
                done
 systemctl restart ws-tls
