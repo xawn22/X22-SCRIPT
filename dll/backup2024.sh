@@ -1,8 +1,8 @@
 #!/bin/bash
 clear
-IP=$(curl -sS ipv4.icanhazip.com);
+mydomain=$(cat /etc/xray/domain)
 date=$(date +"%Y-%m-%d")
-source /etc/mydb.conf
+source /root/awpanel/var.txt
 mkdir -p /root/backup
 cp -r /root/.acme.sh /root/backup/ &> /dev/null
 cp -r /etc/xray /root/backup/xray/ &> /dev/null
@@ -19,9 +19,9 @@ cp -r /etc/cron.d /root/backup/cron.d &> /dev/null
 cp -r /etc/crontab /root/backup/crontab &> /dev/null
 cd /root
 zip -r $date.zip backup > /dev/null 2>&1
-curl -F chat_id="${id}" -F document=@"$date.zip" -F caption="
-IP : $IP
-Thank You" https://api.telegram.org/bot${token}/sendDocument &> /dev/null
+curl -F chat_id="${ADMIN}" -F document=@"$date.zip" -F caption="
+Auto Backup Data
+Your Domain ${mydomain}" https://api.telegram.org/bot${BOT_TOKEN}/sendDocument &> /dev/null
 cd /root
 rm -rf /root/backup
 rm -rf /root/$date.zip

@@ -333,10 +333,10 @@ wget -q -O /usr/bin/exp "https://${url3}/autoremove.sh" && chmod +x /usr/bin/exp
 wget -q -O /usr/bin/wbmn "https://${url3}/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -q -O /usr/bin/limit "https://${url1}/limit.sh" && chmod +x /usr/bin/limit
 wget -q -O /usr/bin/monitorbw "https://${url1}/monitoring.sh" && chmod +x /usr/bin/monitorbw
-wget -q -O /usr/bin/autov1 "https://${url2}/autobckp_v1.sh" && chmod +x /usr/bin/autov1
+wget -q -O /usr/bin/autobckp "https://${url2}/backup2024.sh" && chmod +x /usr/bin/autobckp
 wget -q -O /usr/bin/autov2 "https://${url2}/autobckp_v2.sh" && chmod +x /usr/bin/autov2
 sleep 2
-echo -e "${or}Update AutoScript XRAY-SSH Succesfuly${NC}"
+echo -e "${or}Update AutoScript X22-SCRIPT Succesfuly${NC}"
 echo -e ""
 read -n 1 -s -r -p "Tap Enter To Back Home-Menu"
 menu
@@ -377,7 +377,7 @@ echo -e "[ ${yl}INFO${NC} ] Start "
 sleep 0.5
 systemctl stop ws-nontls
 systemctl stop nginx
-domain=$(cat /var/lib/fsidvpn/ipvps.conf | cut -d'=' -f2)
+domain=$(cat /var/lib/myscript/ipvps.conf | cut -d'=' -f2)
 Cek=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
 if [[ ! -z "$Cek" ]]; then
 sleep 1
@@ -880,7 +880,6 @@ esac
 
 function backuptelebot(){
 clear
-if [ -f "/etc/mydb.conf" ]; then
 IP=$(curl -sS ipv4.icanhazip.com);
 date=$(date +"%Y-%m-%d")
 source /etc/mydb.conf
@@ -912,13 +911,6 @@ echo -e "
 systemctl restart cron
 clear
 echo -e "Auto Backup Data Time 05:00" | lolcat
-echo ""
-read -rp "Press any key to continue"
-funbackup
-exit 0
-fi
-echo -e "DATABASE NOT FOUND" | lolcat
-echo -e "${rd}Please sett up database first${NC}"
 echo ""
 read -rp "Press any key to continue"
 funbackup
@@ -985,7 +977,7 @@ echo -e "   BACKUP & RESTORE DATA SERVER" | lolcat
 echo ""
 echo -e " [${rd}1${NC}] - ${light}Auto Backup From Bot Telegram${NC}"
 echo -e " [${rd}2${NC}] - ${light}Restore Data From SFTP${NC}"
-echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
+#echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
 echo -e " [${rd}*${NC}] - ${rd}Enter To Exit${NC}"
 echo ""
 read -p " Select Option : " o
