@@ -598,87 +598,26 @@ menu
 
 function xol(){
 clear
+rm -rf /media/awpanel/database.db
 echo -e "
-Install bot panel based by @XolPanel
+Setup bot panel based by @XolPanel
 Moodedd and update by @WaanSuka_Turu
 Thanks All
 " | lolcat
 echo ""
 read -rp "Tap enter to run install bot panel"
 clear
-apt update && apt upgrade
-apt install python3 python3-pip git
-git clone https://github.com/xawn22/X22-SCRIPT.git
-unzip X22-SCRIPT/dll/x.zip
-pip3 install -r awpanel/requirements.txt
-
-#isi data
-echo ""
-read -e -p "[*] Input your Bot Token : " bottoken
-read -e -p "[*] Input Your Id Telegram : " admin
-domain=$(cat /etc/xray/domain)
-echo -e BOT_TOKEN='"'$bottoken'"' > /root/awpanel/var.txt
-echo -e ADMIN='"'$admin'"' >> /root/awpanel/var.txt
-echo -e DOMAIN='"'$domain'"' >> /root/awpanel/var.txt
-cat > /etc/systemd/system/awpanel.service << END
-[Unit]
-Description=@XolPanel - Mod By @WaanSuka_Turu
-After=network.target
-
-[Service]
-WorkingDirectory=/root
-ExecStart=/usr/bin/python3 -m awpanel
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-END
-
-rm -rf X22-SCRIPT
-cd
-clear
-#Create Sh
-cp /root/awpanel/ssh/unlock.sh /usr/bin/unlockssh ; chmod +x /usr/bin/unlockssh
-cp /root/awpanel/ssh/lock.sh /usr/bin/lockssh ; chmod +x /usr/bin/lockssh
-cp /root/awpanel/ssh/addssh.sh /usr/bin/addssh ; chmod +x /usr/bin/addssh
-cp /root/awpanel/ssh/cekssh.sh /usr/bin/cekssh ; chmod +x /usr/bin/cekssh
-cp /root/awpanel/ssh/delssh.sh /usr/bin/delssh ; chmod +x /usr/bin/delssh
-cp /root/awpanel/ssh/list.sh /usr/bin/listssh ; chmod +x /usr/bin/listssh
-cp /root/awpanel/ssh/renewssh.sh /usr/bin/renewssh ; chmod +x /usr/bin/renewssh
-cp /root/awpanel/ssh/restartmanual.sh /usr/bin/restartmanual ; chmod +x /usr/bin/restartmanual
-
-#Create Vmess
-cp /root/awpanel/vmess/addws.sh /usr/bin/addws ; chmod +x /usr/bin/addws
-cp /root/awpanel/vmess/delws.sh /usr/bin/delws ; chmod +x /usr/bin/delws
-cp /root/awpanel/vmess/trialws.sh /usr/bin/trialws ; chmod +x /usr/bin/trialws
-cp /root/awpanel/vmess/list.sh /usr/bin/listws ; chmod +x /usr/bin/listws
-cp /root/awpanel/vmess/renewws.sh /usr/bin/renewws ; chmod +x /usr/bin/renewws
-
-#Create Trojan
-cp /root/awpanel/trojan/addtr.sh /usr/bin/addtr ; chmod +x /usr/bin/addtr
-cp /root/awpanel/trojan/deltr.sh /usr/bin/deltr ; chmod +x /usr/bin/deltr
-cp /root/awpanel/trojan/renewtr.sh /usr/bin/renewtr ; chmod +x /usr/bin/renewtr
-cp /root/awpanel/trojan/list.sh /usr/bin/listtr ; chmod +x /usr/bin/listtr
-
-#Create Vless
-cp /root/awpanel/vless/addvless.sh /usr/bin/add-vless ; chmod +x /usr/bin/add-vless
-cp /root/awpanel/vless/deletevless.sh /usr/bin/delete-vless ; chmod +x /usr/bin/delete-vless
-cp /root/awpanel/vless/member.sh /usr/bin/list-vless ; chmod +x /usr/bin/list-vless
-cp /root/awpanel/vless/renewvless.sh /usr/bin/renew-vless ; chmod +x /usr/bin/renew-vless
-cp /root/awpanel/vless/trialvless.sh /usr/bin/trial-vless ; chmod +x /usr/bin/trial-vless
-
-#other menu
-cp /root/awpanel/trojan/backup.sh /usr/bin/backupbot ; chmod +x /usr/bin/backupbot
-cp /root/awpanel/trojan/restore.sh /usr/bin/restorebot ; chmod +x /usr/bin/restorebot
-cp /root/awpanel/trojan/syssinfo.sh /usr/bin/systeminfo ; chmod +x /usr/bin/systeminfo
-cp /root/awpanel/trojan/infoaja.sh /usr/bin/infobot ; chmod +x /usr/bin/infobot
-cp /root/awpanel/trojan/infoservice.sh /usr/bin/infoservice ; chmod +x /usr/bin/infoservice
-cp /root/awpanel/trojan/list-accounts.sh /usr/bin/list-accounts ; chmod +x /usr/bin/list-accounts
-cp /root/awpanel/trojan/bandwidth-usage.sh /usr/bin/bandwidth-usage ; chmod +x /usr/bin/bandwidth-usage
-systemctl enable awpanel
+read -p "Input Bot Token In Here : " botapi
+sleep 0.2
+read -p "Input User Id In Here : " idapi
+echo "
+BOT_TOKEN="${botapi}"
+DOMAIN="${mydomain}"
+ADMIN="${idapi}"
+" >/media/awpanel/var.txt
 systemctl restart awpanel
 clear
-echo " Installations complete, type /menu on your bot"
+echo "Setup Completed, type /menu in your bot"
 }
 
 function blocksite(){
@@ -1003,10 +942,9 @@ script_info=$(curl -sS https://permission.stn-cloud.my.id/message/notif-before.t
 totalram=$(free -m | awk 'NR==2 {print $2}')
 usageram=$(free -m | awk 'NR==2 {print $3}')
 ip=$(curl -sS ipv4.icanhazip.com)
-expscript=$(curl -sS https://permission.stn-cloud.my.id/check/database.ip | grep $ip | awk '{print $3}')
-d2=$(date -d "$biji" +"+%s")
-d1=$(date -d "$expscript" +"+%s")
-dayleft=$(( ($d1 - $d2) / 86400 ))
+valid=$(curl -sS https://permission.stn-cloud.my.id/check/database.ip | grep $ip | awk '{print $3}')
+d1=$(date -d "$valid" +%s)
+d2=$(date -d "$today" +%s)
 client=$(curl -sS https://permission.stn-cloud.my.id/check/database.ip | grep $ip | awk '{print $2}')
 datainfo=$(date)
 upusage="$(vnstat -i eth0 | grep "today" | awk '{print $5" "substr ($6, 1, 1)}')"
@@ -1034,7 +972,7 @@ echo -e "                 ${C}┌───────────────�
   ${C}┌──────────────────────────────────────────┐${NC}
   ${C}│${NC}   ${O}• INFO •${NC}
   ${C}│${NC}   ${yl}Client Name :${NC} $client | Registered
-  ${C}│${NC}   ${yl}Expry In    :${NC} $dayleft Days | $expscript
+  ${C}│${NC}   ${yl}Expry In    :${NC} $(((d1 - d2) / 86400)) Day | $valid
   ${C}│${NC}
   ${C}│${NC}   ${O}• INFO •${NC}
   ${C}│${NC}   ${yl}SSH-WS      :${NC} $sshws Account

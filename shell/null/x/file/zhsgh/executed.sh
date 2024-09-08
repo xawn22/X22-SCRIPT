@@ -296,6 +296,83 @@ wget -q -O /usr/bin/limit "https://${url1}/limit.sh" && chmod +x /usr/bin/limit
 wget -q -O /usr/bin/monitorbw "https://${url1}/monitoring.sh" && chmod +x /usr/bin/monitorbw
 wget https://${url3}/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 
+sleep 1
+clear
+cd /media/
+apt update -y && apt upgrade -y
+apt install python3 python3-pip git -y
+git clone https://github.com/xawn22/X22-SCRIPT.git
+unzip X22-SCRIPT/dll/x.zip
+pip3 install -r awpanel/requirements.txt
+
+#isi data
+echo ""
+echo -e "
+BOT_TOKEN="x"
+ADMIN="x"
+DOMAIN="x"
+" >/media/awpanel/var.txt
+echo -e '#!/bin/bash\ncd /media/\npython3 -m awpanel' > /usr/bin/botpanel
+cat > /etc/systemd/system/awpanel.service << END
+[Unit]
+Description=@XolPanel - Mod By @WaanSuka_Turu
+After=network.target
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/usr/bin/botpanel
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+END
+
+clear
+#Create Sh
+cp /media/awpanel/ssh/unlock.sh /usr/bin/unlockssh ; chmod +x /usr/bin/unlockssh
+cp /media/awpanel/ssh/lock.sh /usr/bin/lockssh ; chmod +x /usr/bin/lockssh
+cp /media/awpanel/ssh/addssh.sh /usr/bin/addssh ; chmod +x /usr/bin/addssh
+cp /media/awpanel/ssh/cekssh.sh /usr/bin/cekssh ; chmod +x /usr/bin/cekssh
+cp /media/awpanel/ssh/delssh.sh /usr/bin/delssh ; chmod +x /usr/bin/delssh
+cp /media/awpanel/ssh/list.sh /usr/bin/listssh ; chmod +x /usr/bin/listssh
+cp /media/awpanel/ssh/renewssh.sh /usr/bin/renewssh ; chmod +x /usr/bin/renewssh
+cp /media/awpanel/ssh/restartmanual.sh /usr/bin/restartmanual ; chmod +x /usr/bin/restartmanual
+
+#Create Vmess
+cp /media/awpanel/vmess/addws.sh /usr/bin/addws ; chmod +x /usr/bin/addws
+cp /media/awpanel/vmess/delws.sh /usr/bin/delws ; chmod +x /usr/bin/delws
+cp /media/awpanel/vmess/trialws.sh /usr/bin/trialws ; chmod +x /usr/bin/trialws
+cp /media/awpanel/vmess/list.sh /usr/bin/listws ; chmod +x /usr/bin/listws
+cp /media/awpanel/vmess/renewws.sh /usr/bin/renewws ; chmod +x /usr/bin/renewws
+
+#Create Trojan
+cp /media/awpanel/trojan/addtr.sh /usr/bin/addtr ; chmod +x /usr/bin/addtr
+cp /media/awpanel/trojan/deltr.sh /usr/bin/deltr ; chmod +x /usr/bin/deltr
+cp /media/awpanel/trojan/renewtr.sh /usr/bin/renewtr ; chmod +x /usr/bin/renewtr
+cp /media/awpanel/trojan/list.sh /usr/bin/listtr ; chmod +x /usr/bin/listtr
+
+#Create Vless
+cp /media/awpanel/vless/addvless.sh /usr/bin/add-vless ; chmod +x /usr/bin/add-vless
+cp /media/awpanel/vless/deletevless.sh /usr/bin/delete-vless ; chmod +x /usr/bin/delete-vless
+cp /media/awpanel/vless/member.sh /usr/bin/list-vless ; chmod +x /usr/bin/list-vless
+cp /media/awpanel/vless/renewvless.sh /usr/bin/renew-vless ; chmod +x /usr/bin/renew-vless
+cp /media/awpanel/vless/trialvless.sh /usr/bin/trial-vless ; chmod +x /usr/bin/trial-vless
+
+#other menu
+cp /media/awpanel/trojan/backup.sh /usr/bin/backupbot ; chmod +x /usr/bin/backupbot
+cp /media/awpanel/trojan/restore.sh /usr/bin/restorebot ; chmod +x /usr/bin/restorebot
+cp /media/awpanel/trojan/syssinfo.sh /usr/bin/systeminfo ; chmod +x /usr/bin/systeminfo
+cp /media/awpanel/trojan/infoaja.sh /usr/bin/infobot ; chmod +x /usr/bin/infobot
+cp /media/awpanel/trojan/infoservice.sh /usr/bin/infoservice ; chmod +x /usr/bin/infoservice
+cp /media/awpanel/trojan/list-accounts.sh /usr/bin/list-accounts ; chmod +x /usr/bin/list-accounts
+cp /media/awpanel/trojan/bandwidth-usage.sh /usr/bin/bandwidth-usage ; chmod +x /usr/bin/bandwidth-usage
+systemctl enable awpanel
+systemctl restart awpanel
+rm -rf .git
+rm -rf X22-SCRIPT
+rm -rf x.zip
+cd
+
 mydomain=$(cat /etc/xray/domain)
 log="
 ────────────────────
