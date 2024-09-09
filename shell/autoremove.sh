@@ -1,5 +1,5 @@
 #!/bin/bash
-source /root/awpanel/var.txt
+source /media/awpanel/var.txt
 TIME="10"
 URL="https://api.telegram.org/bot${BOT_TOKEN}/sendMessage"
 #Autoremove expired accounts for Xray Vless

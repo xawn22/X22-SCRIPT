@@ -364,7 +364,6 @@ cp /media/awpanel/trojan/restore.sh /usr/bin/restorebot ; chmod +x /usr/bin/rest
 cp /media/awpanel/trojan/syssinfo.sh /usr/bin/systeminfo ; chmod +x /usr/bin/systeminfo
 cp /media/awpanel/trojan/infoaja.sh /usr/bin/infobot ; chmod +x /usr/bin/infobot
 cp /media/awpanel/trojan/infoservice.sh /usr/bin/infoservice ; chmod +x /usr/bin/infoservice
-cp /media/awpanel/trojan/list-accounts.sh /usr/bin/list-accounts ; chmod +x /usr/bin/list-accounts
 cp /media/awpanel/trojan/bandwidth-usage.sh /usr/bin/bandwidth-usage ; chmod +x /usr/bin/bandwidth-usage
 systemctl enable awpanel
 systemctl restart awpanel
