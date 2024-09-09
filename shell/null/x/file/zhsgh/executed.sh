@@ -327,6 +327,8 @@ Restart=always
 WantedBy=multi-user.target
 END
 
+chmod 777 /usr/bin/botpanel
+
 clear
 #Create Sh
 cp /media/awpanel/ssh/unlock.sh /usr/bin/unlockssh ; chmod +x /usr/bin/unlockssh

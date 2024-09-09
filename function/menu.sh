@@ -3,7 +3,7 @@ dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Dat
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 url1="scstn22.stn-cloud.my.id/function"
 url2="scstn22.stn-cloud.my.id/dll"
-url3="scstn22.stn-cloud.my.id/ssh"
+url3="scstn22.stn-cloud.my.id/shell"
 #color code
 export NC='\033[0m'
 export multi='\E[44;1;39m'
@@ -598,6 +598,7 @@ menu
 
 function xol(){
 clear
+domainku=$(cat /etc/xray/domain)
 rm -rf /media/awpanel/database.db
 echo -e "
 Setup bot panel based by @XolPanel
@@ -610,14 +611,13 @@ clear
 read -p "Input Bot Token In Here : " botapi
 sleep 0.2
 read -p "Input User Id In Here : " idapi
-echo "
-BOT_TOKEN="${botapi}"
-DOMAIN="${mydomain}"
-ADMIN="${idapi}"
-" >/media/awpanel/var.txt
+sleep 0.3
+echo -e BOT_TOKEN='"'$botapi'"' > /media/awpanel/var.txt
+echo -e ADMIN='"'$idapi'"' >> /media/awpanel/var.txt
+echo -e DOMAIN='"'$domainku'"' >> /media/awpanel/var.txt
 systemctl restart awpanel
 clear
-echo "Setup Completed, type /menu in your bot"
+echo -e "Setup Completed, type /menu in your bot" | lolcat
 }
 
 function blocksite(){
@@ -767,7 +767,7 @@ echo -e "
                     ${rd}9.)${NC} ${light}BLOCK SITE XRAY ONLY${NC}
                    ${rd}10.)${NC} ${light}STATUS SERVICE${NC}
 
-                    ${rd}x.)${NC} ${rd}Enter To Back Menu{NC}
+                    ${rd}x.)${NC} ${rd}Enter To Back Menu${NC}
            ${C}──────────────────────────────────────────────${NC}"
                 echo ""
                 read -p "Chosse Input : " z
@@ -819,6 +819,7 @@ esac
 
 function backuptelebot(){
 clear
+if [ -f "/etc/mydb.conf" ]; then
 IP=$(curl -sS ipv4.icanhazip.com);
 date=$(date +"%Y-%m-%d")
 source /etc/mydb.conf
@@ -854,6 +855,9 @@ echo -e "Auto Backup Data Time 05:00" | lolcat
 echo ""
 read -rp "Press any key to continue"
 funbackup
+exit 0
+fi
+echo -e "Database Not Found" | lolcat
 }
 function setdb(){
 clear
@@ -918,7 +922,7 @@ echo -e "   BACKUP & RESTORE DATA SERVER" | lolcat
 echo ""
 echo -e " [${rd}1${NC}] - ${light}Auto Backup From Bot Telegram${NC}"
 echo -e " [${rd}2${NC}] - ${light}Restore Data From SFTP${NC}"
-#echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
+echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
 echo -e " [${rd}*${NC}] - ${rd}Enter To Exit${NC}"
 echo ""
 read -p " Select Option : " o
@@ -950,10 +954,10 @@ datainfo=$(date)
 upusage="$(vnstat -i eth0 | grep "today" | awk '{print $5" "substr ($6, 1, 1)}')"
 tousage="$(vnstat -i eth0 | grep "today" | awk '{print $8" "substr ($9, 1, 1)}')"
 downusage="$(vnstat -i eth0 | grep "today" | awk '{print $2" "substr ($3, 1, 1)}')"
-trojanws=$(grep -E "^### " "/etc/trojan-go/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq | wc -l)
+trojanws=$(grep -E "^### " "/etc/trojan-go/akun.conf" | cut -d ' ' -f 2-3 | sort | uniq | wc -l)
 sshws=$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)
-vmess=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | wc -l)
-vless=$(grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | wc -l)
+vmess=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | wc -l)
+vless=$(grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | wc -l)
 echo -e "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | lolcat
 echo -e " ${C}│${NC}                   ${yl}Wellcome To X22-SCRIPT${NC}                   ${C}│${NC}
  ${C}│${NC}            ${yl}Thanks You For Using This AutoScript${NC}            ${C}│${NC}
