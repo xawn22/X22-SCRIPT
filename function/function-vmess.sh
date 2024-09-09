@@ -403,7 +403,7 @@ clear
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${multi}     ${rd}Renew Accounts Xray-Vmess       ${NC}"
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | nl
+grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | nl
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "[${rd}NOTE${NC}] Tap Enter To Back Menu-Vmess"
 echo ""
@@ -451,7 +451,7 @@ clear
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "${multi}     ${rd}Delete Accounts Xray-Vmess      ${NC}"
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | nl
+grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | nl
 echo -e "${cyan}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo -e "[${rd}NOTE${NC}] Tap Enter To Back Menu-Vmess"
 echo -e ""
@@ -731,7 +731,7 @@ menu-vmess
 
 function renewvless(){
 clear
-grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | nl
+grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | nl
 echo ""
 read -rp "Input Username : " user
 read -p "Expired (days): " masaaktif
@@ -760,7 +760,7 @@ menu-vmess
 
 function deletevless(){
 clear
-grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq | nl
+grep -E "^#&&# " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | sort | uniq | nl
 echo ""
 read -rp "Input Username : " user
 sleep 0.5
@@ -855,11 +855,7 @@ echo -e "
  ${rd}6.)${NC}  Create Accounts Xray/Vless
  ${rd}7.)${NC}  Create Trial Xray/Vless
  ${rd}8.)${NC}  Renew Accounts Xray/Vless
- ${rd}9.)${NC}  Remove Accounts Xray/Vless
- 
- ${rd}10.)${NC} Add Block Site
- ${rd}11.)${NC} List Site Blockled
- ${rd}12.)${NC} Unblock Site"
+ ${rd}9.)${NC}  Remove Accounts Xray/Vless"
 echo -e "${cyan}───────────────────────────────────────────────────────${NC}"
 echo -e "Press enter to return to the menu"
 echo -e ""
