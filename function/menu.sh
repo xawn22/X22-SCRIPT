@@ -599,7 +599,6 @@ menu
 function xol(){
 clear
 domainku=$(cat /etc/xray/domain)
-rm -rf /media/awpanel/database.db
 echo -e "
 Setup bot panel based by @XolPanel
 Moodedd and update by @WaanSuka_Turu
@@ -610,12 +609,42 @@ read -rp "Tap enter to run install bot panel"
 clear
 read -p "Input Bot Token In Here : " botapi
 sleep 0.2
+read -p "Input Your Username Telegram : " user
+sleep 0.2
 read -p "Input User Id In Here : " idapi
 sleep 0.3
-echo -e BOT_TOKEN='"'$botapi'"' > /media/awpanel/var.txt
-echo -e ADMIN='"'$idapi'"' >> /media/awpanel/var.txt
-echo -e DOMAIN='"'$domainku'"' >> /media/awpanel/var.txt
-systemctl restart awpanel
+cat > /media/cybervpn/var.txt << END
+ADMIN="$idapi"
+BOT_TOKEN="$botapi"
+DOMAIN="$domainku"
+DNS="example.a"
+PUB="7fbd1f8aa0abfe15a7903e837f78aba39cf61d36f183bd604daa2fe4ef3b7b59"
+OWN="$user"
+SALDO="9999999"
+END
+cd /media/
+rm -f /usr/bin/cihuy
+echo -e '#!/bin/bash\ncd /media/\npython3 -m cybervpn' > /usr/bin/cihuy
+chmod 777 /usr/bin/cihuy
+cat > /etc/systemd/system/cihuy.service << END
+[Unit]
+Description=Simple Awn - @WaanSuka_Turu
+After=network.target
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/usr/bin/cihuy
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+END
+cd
+systemctl daemon-reload
+systemctl start cihuy
+systemctl enable cihuy
+systemctl restart cihuy
 clear
 echo -e "Setup Completed, type /menu in your bot" | lolcat
 }

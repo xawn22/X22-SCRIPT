@@ -2,7 +2,7 @@
 clear
 mydomain=$(cat /etc/xray/domain)
 date=$(date +"%Y-%m-%d")
-source /media/awpanel/var.txt
+source /media/cybervpn/var.txt
 mkdir -p /root/backup
 cp -r /root/.acme.sh /root/backup/ &> /dev/null
 cp -r /etc/xray /root/backup/xray/ &> /dev/null
