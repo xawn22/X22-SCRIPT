@@ -622,29 +622,6 @@ PUB="7fbd1f8aa0abfe15a7903e837f78aba39cf61d36f183bd604daa2fe4ef3b7b59"
 OWN="$user"
 SALDO="9999999"
 END
-cd /media/
-rm -f /usr/bin/cihuy
-echo -e '#!/bin/bash\ncd /media/\npython3 -m cybervpn' > /usr/bin/cihuy
-chmod 777 /usr/bin/cihuy
-cat > /etc/systemd/system/cihuy.service << END
-[Unit]
-Description=Simple Awn - @WaanSuka_Turu
-After=network.target
-
-[Service]
-WorkingDirectory=/root
-ExecStart=/usr/bin/cihuy
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-
-END
-cd
-systemctl daemon-reload
-systemctl start cihuy
-systemctl enable cihuy
-systemctl restart cihuy
 clear
 echo -e "Setup Completed, type /menu in your bot" | lolcat
 }
