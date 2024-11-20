@@ -327,7 +327,29 @@ pip3 install aiohttp &>/dev/null
 pip3 install paramiko &>/dev/null
 rm -rf .git
 rm -rf X22-SCRIPT
+cd /media/
+rm -f /usr/bin/cihuy
+echo -e '#!/bin/bash\ncd /media/\npython3 -m cybervpn' > /usr/bin/cihuy
+chmod 777 /usr/bin/cihuy
+cat > /etc/systemd/system/cihuy.service << END
+[Unit]
+Description=Simple Awn - @WaanSuka_Turu
+After=network.target
+
+[Service]
+WorkingDirectory=/root
+ExecStart=/usr/bin/cihuy
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+END
 cd
+systemctl daemon-reload
+systemctl start cihuy
+systemctl enable cihuy
+systemctl restart cihuy
 
 mydomain=$(cat /etc/xray/domain)
 log="
