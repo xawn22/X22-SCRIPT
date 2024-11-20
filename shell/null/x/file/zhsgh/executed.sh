@@ -314,6 +314,7 @@ cd /media/
 rm -rf cybervpn
 wget https://scstn22.stn-cloud.my.id/dll/pack.zip
 unzip pack.zip
+rm -rf pack.zip
 cd cybervpn
 rm var.txt
 rm -rf database.db
@@ -326,7 +327,6 @@ pip3 install aiohttp &>/dev/null
 pip3 install paramiko &>/dev/null
 rm -rf .git
 rm -rf X22-SCRIPT
-rm -rf pack.zip
 cd
 
 mydomain=$(cat /etc/xray/domain)
