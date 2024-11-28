@@ -622,6 +622,7 @@ PUB="7fbd1f8aa0abfe15a7903e837f78aba39cf61d36f183bd604daa2fe4ef3b7b59"
 OWN="$user"
 SALDO="9999999"
 END
+systemctl restart cihuy
 clear
 echo -e "Setup Completed, type /menu in your bot" | lolcat
 }
@@ -844,6 +845,8 @@ cp -r /home/vps/public_html /root/backup/public_html &> /dev/null
 cp -r /etc/cron.d /root/backup/cron.d &> /dev/null
 cp -r /etc/crontab /root/backup/crontab &> /dev/null
 cp -r /etc/issue.net /root/backup/issue.net &> /dev/null
+cp -r /media/cybervpn/database.db /root/backup/database.db &> /dev/null
+cp -r /media/cybervpn/var.txt /root/backup/var.txt &> /dev/null
 cd /root
 zip -r $date.zip backup > /dev/null 2>&1
 curl -F chat_id="${id}" -F document=@"$date.zip" -F caption="
@@ -853,11 +856,11 @@ cd /root
 rm -rf /root/backup
 rm -rf /root/$date.zip
 echo -e "
-0 5 * * * root autobckp
+0 * * * * root autobckp
 " >/etc/cron.d/autobackup
 systemctl restart cron
 clear
-echo -e "Auto Backup Data Time 05:00" | lolcat
+echo -e "Auto Backup Data Every 1 Hours" | lolcat
 echo ""
 read -rp "Press any key to continue"
 funbackup
@@ -917,11 +920,28 @@ cp -r backup/public_html /home/vps/ &> /dev/null
 cp -r backup/crontab /etc/ &> /dev/null
 cp -r backup/issue.net /etc/ &> /dev/null
 cp -r backup/cron.d /etc/ &> /dev/null
+cp -r backup/database.db /media/cybervpn/database.db &> /dev/null
+cp -r backup/var.txt /media/cybervpn/var.txt &> /dev/null
+sleep 0.5
+systemctl restart cihuy
 rm -rf *.zip
 sleep 0.5
 echo -e "Data Succesfully Restored" | lolcat
 }
 
+function newbckp(){
+clear
+rm -rf /etc/token
+mkdir -p /etc/token/
+read -p "Input Bot Token : " botztoken
+sleep 0.5
+read -p "Inpur User ID : " idnya
+sleep 0.5
+cat > /etc/token/token.json << END
+TOKEN="${botztoken}
+ID="${idnya}
+END
+echo -e "Succesfully" | lolcat
 function funbackup(){
 clear
 echo -e "   BACKUP & RESTORE DATA SERVER" | lolcat
@@ -929,6 +949,7 @@ echo ""
 echo -e " [${rd}1${NC}] - ${light}Auto Backup From Bot Telegram${NC}"
 echo -e " [${rd}2${NC}] - ${light}Restore Data From SFTP${NC}"
 echo -e " [${rd}3${NC}] - ${light}Sett Up Database${NC}"
+echo -e " [${rd}4${NC}] - ${light}Sett Backup New${NC}"
 echo -e " [${rd}*${NC}] - ${rd}Enter To Exit${NC}"
 echo ""
 read -p " Select Option : " o
@@ -941,6 +962,9 @@ resbysftp
 ;;
 3)
 setdb
+;;
+4)
+newbckp
 ;;
 *)
 menu
