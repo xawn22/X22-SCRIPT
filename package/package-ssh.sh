@@ -76,8 +76,6 @@ echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
 #update
-apt update -y
-apt upgrade -y
 apt dist-upgrade -y
 apt-get remove --purge ufw firewalld -y
 apt-get remove --purge exim4 -y
@@ -383,46 +381,49 @@ netfilter-persistent reload
 cd /usr/bin
 wget -O stat "https://${url1}/stat.sh"
 wget -O banner "https://${url1}/banner.sh"
-wget -O speedtest "https://${url1}/speedtest_cli.py"
-wget -O info "https://${url1}/info.sh"
-wget -O ram "https://${url1}/ram.sh"
-wget -O tendang "https://${url1}/tendang.sh"
-wget -O clearlog "https://${url1}/clearlog.sh"
-wget -O wbmn "https://${url1}/webmin.sh"
-wget -O exp "https://${url1}/autoremove.sh"
 wget -O swapkvm "https://${url1}/swapkvm.sh"
-wget -O cf-pointing "https://${url3}/cloudflare-pointing.sh"
-wget -O cf-setting "https://${url3}/cloudflare-setting.sh"
 wget -O package-xray "https://${url4}/package-xray.sh"
-wget -O menu "https://${url3}/menu.sh"
-wget -O autobckp "https://${url5}/backup2024.sh"
-wget -O menu-ssh "https://${url3}/function-ssh.sh"
-wget -O menu-trgo "https://${url3}/function-trgo.sh"
-wget -O menu-vmess "https://${url3}/function-vmess.sh"
-wget -O license "https://${url3}/license.sh"
-chmod +x cf-pointing
-chmod +x cf-setting
 chmod +x banner
-chmod +x stat
-chmod +x speedtest
-chmod +x info
-chmod +x tendang
-chmod +x ram
-chmod +x clearlog
-chmod +x wbmn
-chmod +x menu
-chmod +x exp
 chmod +x swapkvm
-chmod +x ins-xray
-chmod +x autobckp
-chmod +x license
-chmod +x menu-ssh
-chmod +x menu-vmess
-chmod +x menu-trgo
 
-echo "0 9 * * * root clearlog && reboot" >> /etc/crontab
-echo "0 7 * * * root exp" >> /etc/crontab
+echo "58 4 * * * root exp" >> /etc/crontab
+echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
 # remove unnecessary files
+cd
+mkdir /root/menu
+cd /root/menu
+wget https://scstn22.stn-cloud.my.id/menu/packet.zip
+unzip packet.zip
+rm -rf packet.zip
+mv /root/menu/function-vmess.sh /usr/bin/menu-vmess
+mv /root/menu/function-trgo.sh /usr/bin/menu-trgo
+mv /root/menu/function-ssh.sh /usr/bin/menu-ssh
+mv /root/menu/monitoring.sh /usr/bin/monitorbw
+mv /root/menu/limit.sh /usr/bin/limit
+mv /root/menu/backup2024.sh /usr/bin/autobckp
+mv /root/menu/menu.sh /usr/bin/menu
+mv /root/menu/speedtest_cli.py /usr/bin/speedtest
+mv /root/menu/tendang.sh /usr/bin/tendang
+mv /root/menu/info.sh /usr/bin/info
+mv /root/menu/clearlog.sh /usr/bin/clearlog
+mv /root/menu/ram.sh /usr/bin/ram
+mv /root/menu/autoremove.sh /usr/bin/exp
+mv /root/menu/webmin.sh /usr/bin/wbmn
+chmod +x /usr/bin/menu-vmess
+chmod +x /usr/bin/menu-trgo
+chmod +x /usr/bin/menu-ssh
+chmod +x /usr/bin/monitorbw
+chmod +x /usr/bin/limit
+chmod +x /usr/bin/autobckp
+chmod +x /usr/bin/menu
+chmod +x /usr/bin/speedtest
+chmod +x /usr/bin/info
+chmod +x /usr/bin/tendang
+chmod +x /usr/bin/clearlog
+chmod +x /usr/bin/ram
+chmod +x /usr/bin/wbmn
+chmod +x /usr/bin/exp
+rm -rf /root/menu
 cd
 apt autoclean -y
 apt -y remove --purge unscd

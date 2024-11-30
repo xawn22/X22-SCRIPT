@@ -2,7 +2,7 @@
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 check="permission.stn-cloud.my.id/check"
-url1="scstn22.stn-cloud.my.id/function"
+url1="scstn22.stn-cloud.my.id/menu"
 url2="scstn22.stn-cloud.my.id/package"
 url3="scstn22.stn-cloud.my.id/shell"
 #########################
@@ -292,8 +292,6 @@ ${or}└────────────────────────
 "
 sleep 3
 wget http://${url2}/package-udpcustom.sh && chmod +x package-udpcustom.sh && ./package-udpcustom.sh
-wget -q -O /usr/bin/limit "https://${url1}/limit.sh" && chmod +x /usr/bin/limit
-wget -q -O /usr/bin/monitorbw "https://${url1}/monitoring.sh" && chmod +x /usr/bin/monitorbw
 wget https://${url3}/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 
 sleep 1
