@@ -826,10 +826,10 @@ esac
 
 function backuptelebot(){
 clear
-if [ -f "/etc/mydb.conf" ]; then
+if [ -f "/etc/token/token.json" ]; then
 IP=$(curl -sS ipv4.icanhazip.com);
 date=$(date +"%Y-%m-%d")
-source /etc/mydb.conf
+source /etc/token/token.json
 mkdir -p /root/backup
 cp -r /root/.acme.sh /root/backup/ &> /dev/null
 cp -r /etc/xray /root/backup/xray/ &> /dev/null
@@ -849,9 +849,9 @@ cp -r /media/cybervpn/database.db /root/backup/database.db &> /dev/null
 cp -r /media/cybervpn/var.txt /root/backup/var.txt &> /dev/null
 cd /root
 zip -r $date.zip backup > /dev/null 2>&1
-curl -F chat_id="${id}" -F document=@"$date.zip" -F caption="
+curl -F chat_id="${ID}" -F document=@"$date.zip" -F caption="
 IP : $IP
-Thank You" https://api.telegram.org/bot${token}/sendDocument &> /dev/null
+Thank You" https://api.telegram.org/bot${TOKEN}/sendDocument &> /dev/null
 cd /root
 rm -rf /root/backup
 rm -rf /root/$date.zip
@@ -890,9 +890,9 @@ sleep 0.3
 read -p "  Input User ID  : " b
 sleep 0.2
 echo -e "
-token="${a}"
-id="${b}"
-" >/etc/mydb.conf
+TOKEN="${a}"
+ID="${b}"
+" >/etc/token/token.json
 echo -e "Sett Up Database Successsfully" | lolcat
 echo ""
 read -rp "Press any key to continue"
@@ -938,8 +938,8 @@ sleep 0.5
 read -p "Inpur User ID : " idnya
 sleep 0.5
 cat > /etc/token/token.json << END
-TOKEN="${botztoken}
-ID="${idnya}
+TOKEN="${botztoken}"
+ID="${idnya}"
 END
 echo -e "Succesfully" | lolcat
 }
