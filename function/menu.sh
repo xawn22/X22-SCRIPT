@@ -942,6 +942,7 @@ TOKEN="${botztoken}
 ID="${idnya}
 END
 echo -e "Succesfully" | lolcat
+}
 function funbackup(){
 clear
 echo -e "   BACKUP & RESTORE DATA SERVER" | lolcat
