@@ -50,11 +50,11 @@ mkdir -p /var/log/xray/
 
 echo -e "Port ${RED}80${NC} sedang terpakai di layanan $Cek " 
 systemctl stop $Cek
-sleep 2
-echo -e "Sedang menonaktifkan layanan $Cek " 
 sleep 1
+echo -e "Sedang menonaktifkan layanan $Cek " 
+sleep 0.3
 echo -e "Perpanjang cert segera dimulai...." 
-sleep 2
+sleep 0.5
 echo -e "Proses mengambil acme untuk cert...."
 systemctl stop nginx
 mkdir /root/.acme.sh
@@ -65,7 +65,7 @@ chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 echo -e "Perpanjang cert telah selesai..!!"
-sleep 5
+sleep 1
 rm acme.sh >/dev/null 2>&1
 
 service squid start

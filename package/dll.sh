@@ -44,10 +44,6 @@ EOF
 chown -R www-data:www-data /etc/msmtprc
 cd /usr/bin
 wget -O strt "https://${url1}/strt.sh"
-wget -O limitspeed "https://${url1}/limitspeed.sh"
-wget -O backupv2 "https://${url1}/backup.sh"
-chmod +x backupv2
 chmod +x strt
-chmod +x limitspeed
 cd
 rm -f /root/set-br.sh
